@@ -1,0 +1,24 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Template to Create an IAM Role to use for AWS Support access
+Resources:
+  CMPWorkloadAccountAdminRole: # Logical ID of the resource
+    Type: "AWS::IAM::Role" # Resource type
+    Properties:
+      RoleName: wpgb19imr0001cmp
+      Description: DO NOT MODIFY/DELETE! This role will be assumed by the CMP GitLab Worker.
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: "Allow"
+            Principal:
+                "AWS": "arn:aws:iam::361540080440:role/wpnr19imr0003sr-cmp-gitlab-worker" # Allow the GitLab worker IAM role to assume this role for CMP
+            Action: "sts:AssumeRole"
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/AdministratorAccess # The managed policy arn of AdministratorAccess
+Outputs:
+  RoleName:
+    Description: Name of Created IAM Role
+    Value: !Ref CMPWorkloadAccountAdminRole  
+  RoleArn:
+    Description: Arn of Created Role
+    Value: !GetAtt CMPWorkloadAccountAdminRole.Arn
