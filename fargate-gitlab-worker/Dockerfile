@@ -70,6 +70,17 @@ RUN apt-get install -y openssh-server && \
 
 EXPOSE 22
 
+# --------------------------------------------------------------------------
+# Install and configure packer.
+# 
+# --------------------------------------------------------------------------
+RUN wget -O /tmp/packer.zip https://releases.hashicorp.com/packer/1.14.2/packer_1.14.2_linux_amd64.zip
+RUN unzip /tmp/packer.zip -d /tmp/
+RUN cp /tmp/packer /usr/local/bin/
+RUN chmod +x /usr/local/bin/packer
+RUN packer plugins install "github.com/hashicorp/amazon"
+#RUN packer plugins install "github.com/hashicorp/amazon"
+#RUN packer plugins install --path /root/.config/packer/plugins/github.com/hashicorp/amazon/packer-plugin-amazon_v1.7.0_x5.0_linux_amd64 github.com/hashicorp/amazon # local init
 
 # -------------------------------------------------------------------------------------
 # Execute a startup script.
