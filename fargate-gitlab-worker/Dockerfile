@@ -45,6 +45,13 @@ RUN apt-get update -qq -y \
 # ---------------------------------------------------------------------------- #
 RUN apt-get install -qq -y jq
 
+# ---------------------------------------------------------------------------- #
+# Install and configure 'yq', a tool to parse Amazon ECS temporary/unique      #
+# security credentials, which come in the yaml format.                         #
+# ---------------------------------------------------------------------------- #
+RUN apt-get install -qq -y wget
+RUN wget -qO /usr/local/bin/yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64
+RUN chmod a+x /usr/local/bin/yq
 
 # ----------------------------------------
 # Install Terraform
