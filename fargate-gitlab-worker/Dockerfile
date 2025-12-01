@@ -89,6 +89,15 @@ RUN packer plugins install "github.com/hashicorp/amazon"
 #RUN packer plugins install "github.com/hashicorp/amazon"
 #RUN packer plugins install --path /root/.config/packer/plugins/github.com/hashicorp/amazon/packer-plugin-amazon_v1.7.0_x5.0_linux_amd64 github.com/hashicorp/amazon # local init
 
+
+# --------------------------------------------------------------------------
+# Install and crane
+# 
+# --------------------------------------------------------------------------
+RUN curl -Lo /tmp/crane.tar https://github.com/google/go-containerregistry/releases/download/v0.20.7/go-containerregistry_Linux_x86_64.tar.gz
+RUN tar -zxf /tmp/crane.tar -C /usr/local/bin/ crane
+RUN chmod +x /usr/local/bin/crane
+
 # -------------------------------------------------------------------------------------
 # Execute a startup script.
 # https://success.docker.com/article/use-a-script-to-initialize-stateful-container-data
